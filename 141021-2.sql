@@ -1,3 +1,3 @@
-select ename, sal, comm,sal+NVL2(comm,0,null)
+select ename, sal, comm,sal+NVL2(comm,comm,0)
 from employees
 /
