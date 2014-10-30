@@ -5,5 +5,5 @@ union
 select deptno,empno,ename
 from employees
 where deptno = 20 or deptno = 30
-order by deptno
+order by empno
 /
