@@ -1,0 +1,6 @@
+insert into departments (deptno,dname,loc)
+values (50,'教育','大手町');
+select * from departments;
+rollback;
+select * from departments;
+/
