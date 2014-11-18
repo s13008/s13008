@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Sample {
+public class Select1 {
 	private String _user = "s13008";
 	private String _pass = "password";
 	private String _host = "172.16.40.4";
@@ -12,7 +12,7 @@ public class Sample {
 	
 	public static void main(String[] args){
 
-		Sample sample = new Sample();
+		Select1 sample = new Select1();
 		try {
 			sample.select();
 		}catch(Exception e){
@@ -32,13 +32,23 @@ public class Sample {
 
 			st = conn.createStatement();
 
-			rs = st.executeQuery("select deptno, dname from DEPARTMENTS");
+                        String sql = "select e.empno,e.ename,e.job,m.ename,d.dname,d.loc ";
+                          sql += "from employees e left outer join employees m ";
+                          sql += "on e.mgr = m.empno ";
+                          sql += "join departments d ";
+                          sql += "on e.deptno = d.deptno";
+                          
+                          rs = st.executeQuery(sql);
 
 			while(rs.next()){
-				String dept_id = rs.getString(1);
-				String dept_name = rs.getString(2);
+				String e_empno = rs.getString(1);
+				String e_ename = rs.getString(2);
+                                String e_job = rs.getString(3);
+                                String m_ename = rs.getString(4);
+                                String d_dname = rs.getString(5);
+                                String d_loc = rs.getString(6);
 
-				System.out.printf("部門番号： %s\t部門名： %s\n", dept_id, dept_name);
+				System.out.printf("部門番号： %s\t部門名： %s\t職種:  %s\t社員名:  %s\t部署名:  %s\t所属:  %s\n", e_empno,e_ename,e_job,m_ename,d_dname,d_loc);
 			}
 		}catch(ClassNotFoundException e){
 			throw e;
